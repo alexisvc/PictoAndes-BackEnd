@@ -3,6 +3,7 @@ const pictogramsRouter = express.Router()
 const Pictogram = require('../models/Pictogram')
 const User = require('../models/User')
 const userExtractor = require('../middleware/userExtractor')
+const upload = require('../libs/multerConfig')
 
 // Obtener todos los pictogramas
 pictogramsRouter.get('/', async (req, res) => {
@@ -43,56 +44,70 @@ pictogramsRouter.get('/:id', (req, res, next) => {
   }).catch((error) => { next(error) })
 })
 
-// Crear pictograma
-pictogramsRouter.post('/', userExtractor, async (req, res, next) => {
-  const { name, category, url } = req.body
-  // Recuperar la id del request
-  const { userId } = req
-  // Verificar que se proporcionen todos los datos necesarios
-  if (!name || !category || !url) {
+// Crear pictograma con carga de imagen
+pictogramsRouter.post('/', userExtractor, upload.single('image'), async (req, res, next) => {
+  const { name, category } = req.body;
+  const { userId } = req;
+
+  if (!name || !category) {
     return res.status(400).json({
-      error: 'Name, category, and URL are required'
-    })
+      error: 'Name and category are required'
+    });
   }
 
   try {
-    // Crear un nuevo pictograma
+    const imageUrl = `http://localhost:3001/images/${req.file.filename}`; // Obtén el nombre del archivo cargado
+
     const newPictogram = new Pictogram({
       name,
       category,
-      url,
-      user: userId // Asignar el ID del usuario que creó el pictograma
-    })
-    // Guardar el pictograma en la base de datos
-    const savedPictogram = await newPictogram.save()
-    // Asignar el pictograma al usuario
-    const user = await User.findById(userId)
-    user.pictograms = user.pictograms.concat(savedPictogram._id)
-    await user.save()
-    res.json(savedPictogram)
+      url: imageUrl,
+      user: userId
+    });
+
+    const savedPictogram = await newPictogram.save();
+
+    const user = await User.findById(userId);
+    user.pictograms = user.pictograms.concat(savedPictogram._id);
+    await user.save();
+
+    res.json(savedPictogram);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-// Actualizar pictograma
-pictogramsRouter.put('/:id', userExtractor, (req, res, next) => {
-  const id = req.params.id
-  const pictogram = req.body
+// Actualizar pictograma con carga de imagen
+pictogramsRouter.put('/:id', userExtractor, upload.single('image'), async (req, res, next) => {
+  const id = req.params.id;
+  const { name, category } = req.body;
 
-  const newPictogramInfo = {
-    name: pictogram.name,
-    category: pictogram.category,
-    url: pictogram.url
+  if (!name || !category) {
+    return res.status(400).json({
+      error: 'Name and category are required'
+    });
   }
 
-  Pictogram.findByIdAndUpdate(id, newPictogramInfo, { new: true })
-    .then((result) => {
-      res.json(result)
-    }).catch((error) => {
-      next(error)
-    })
-})
+  try {
+    const imageUrl = `http://localhost:3001/images/${req.file.filename}`;  // Obtén el nombre del archivo cargado
+
+    const updatedPictogram = {
+      name,
+      category,
+      url: imageUrl
+    };
+
+    const result = await Pictogram.findByIdAndUpdate(id, updatedPictogram, { new: true });
+
+    if (!result) {
+      return res.status(404).json({ error: 'Pictogram not found' });
+    }
+
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Eliminar pictograma
 pictogramsRouter.delete('/:id', userExtractor, async (req, res, next) => {
