@@ -46,68 +46,80 @@ pictogramsRouter.get('/:id', (req, res, next) => {
 
 // Crear pictograma con carga de imagen
 pictogramsRouter.post('/', userExtractor, upload.single('image'), async (req, res, next) => {
-  const { name, category } = req.body;
-  const { userId } = req;
+  const { name, category } = req.body
+  const { userId } = req
 
   if (!name || !category) {
     return res.status(400).json({
       error: 'Name and category are required'
-    });
+    })
   }
 
   try {
-    const imageUrl = `http://localhost:3001/images/${req.file.filename}`; // Obtén el nombre del archivo cargado
+    const imageUrl = `http://localhost:3001/images/${req.file.filename}` // Obtén el nombre del archivo cargado
 
     const newPictogram = new Pictogram({
       name,
       category,
       url: imageUrl,
       user: userId
-    });
+    })
 
-    const savedPictogram = await newPictogram.save();
+    const savedPictogram = await newPictogram.save()
 
-    const user = await User.findById(userId);
-    user.pictograms = user.pictograms.concat(savedPictogram._id);
-    await user.save();
+    const user = await User.findById(userId)
+    user.pictograms = user.pictograms.concat(savedPictogram._id)
+    await user.save()
 
-    res.json(savedPictogram);
+    res.json(savedPictogram)
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
-// Actualizar pictograma con carga de imagen
 pictogramsRouter.put('/:id', userExtractor, upload.single('image'), async (req, res, next) => {
-  const id = req.params.id;
-  const { name, category } = req.body;
+  const id = req.params.id
+  const { name, category } = req.body
 
   if (!name || !category) {
     return res.status(400).json({
       error: 'Name and category are required'
-    });
+    })
   }
 
   try {
-    const imageUrl = `http://localhost:3001/images/${req.file.filename}`;  // Obtén el nombre del archivo cargado
+    let imageUrl = '' // Inicializamos imageUrl como una cadena vacía
+
+    if (req.file) {
+      // Si se cargó una nueva imagen, actualiza la URL de la imagen
+      imageUrl = `http://localhost:3001/images/${req.file.filename}`
+    } else {
+      // Si no se cargó una nueva imagen, obtén la URL de la imagen existente
+      const existingPictogram = await Pictogram.findById(id)
+      if (existingPictogram) {
+        imageUrl = existingPictogram.url
+      } else {
+        return res.status(404).json({ error: 'Pictogram not found' })
+      }
+    }
 
     const updatedPictogram = {
       name,
       category,
       url: imageUrl
-    };
-
-    const result = await Pictogram.findByIdAndUpdate(id, updatedPictogram, { new: true });
-
-    if (!result) {
-      return res.status(404).json({ error: 'Pictogram not found' });
     }
 
-    res.json(result);
+    const result = await Pictogram.findByIdAndUpdate(id, updatedPictogram, { new: true })
+
+    if (!result) {
+      return res.status(404).json({ error: 'Pictogram not found' })
+    }
+
+    res.json(result)
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 // Eliminar pictograma
 pictogramsRouter.delete('/:id', userExtractor, async (req, res, next) => {
