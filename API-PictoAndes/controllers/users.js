@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/User')
 const Pictogram = require('../models/Pictogram')
-const defaultPictograms = require('../assets/defaultPictograms') // Importa el archivo de pictogramas predefinidos
+const defaultPictograms = require('../assets/defaultPictograms')
 
 usersRouter.get('/', async (req, res, next) => {
   const users = await User.find({}).populate('pictograms', {
@@ -38,7 +38,7 @@ usersRouter.post('/', async (req, res, next) => {
 
     const userPictograms = defaultPictograms.map((pictogramData) => ({
       ...pictogramData,
-      user: savedUser._id // Asociar cada pictograma con el usuario
+      user: savedUser._id
     }))
 
     const savedPictograms = await Pictogram.insertMany(userPictograms)
