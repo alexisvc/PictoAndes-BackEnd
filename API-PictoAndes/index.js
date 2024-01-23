@@ -15,6 +15,8 @@ const loginRouter = require('./controllers/login')
 app.use(cors())
 app.use(express.json())
 app.use('/images', express.static('images'))
+app.use('/icons', express.static('resources/categories-icons'))
+
 app.use('/adjetivos', express.static('resources/adjetivos'))
 app.use('/alimentos', express.static('resources/alimentos'))
 app.use('/animales', express.static('resources/animales'))

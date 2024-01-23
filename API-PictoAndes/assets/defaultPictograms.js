@@ -201,7 +201,7 @@ module.exports = [
   { name: 'Pera', category: 'Alimentos', url: 'http://localhost:3001/alimentos/pera.png' },
   { name: 'Plátano', category: 'Alimentos', url: 'http://localhost:3001/alimentos/plátano.png' },
   { name: 'Limón', category: 'Alimentos', url: 'http://localhost:3001/alimentos/limón.png' },
-  { name: 'Yogur', category: 'Alimentos', url: 'http://localhost:3001/alimentos/yogur.png' },
+  { name: 'Yogurt', category: 'Alimentos', url: 'http://localhost:3001/alimentos/yogur.png' },
   { name: 'Helado', category: 'Alimentos', url: 'http://localhost:3001/alimentos/helado.png' },
   { name: 'Galleta', category: 'Alimentos', url: 'http://localhost:3001/alimentos/galleta.png' },
   { name: 'Pastel', category: 'Alimentos', url: 'http://localhost:3001/alimentos/pastel.png' },
@@ -245,11 +245,9 @@ module.exports = [
   { name: 'Circo', category: 'Lugares', url: 'http://localhost:3001/lugares/circo.png' },
 
   // Juegos
-  { name: 'Muñeca', category: 'Juegos', url: 'http://localhost:3001/juegos/muñeca.png' },
-  { name: 'Pelota', category: 'Juegos', url: 'http://localhost:3001/juegos/pelota.png' },
-  { name: 'Globo', category: 'Juegos', url: 'http://localhost:3001/juegos/globo.png' },
-  { name: 'Tobogán', category: 'Juegos', url: 'http://localhost:3001/juegos/tobogán.png' },
-  { name: 'Columpio', category: 'Juegos', url: 'http://localhost:3001/juegos/columpio.png' },
+  { name: 'Muñeca', category: 'Juguetes', url: 'http://localhost:3001/juegos/muñeca.png' },
+  { name: 'Pelota', category: 'Juguetes', url: 'http://localhost:3001/juegos/pelota.png' },
+  { name: 'Globo', category: 'Juguetes', url: 'http://localhost:3001/juegos/globo.png' },
 
   // Deportes
   { name: 'Fútbol', category: 'Deportes', url: 'http://localhost:3001/deportes/fútbol.png' },
@@ -271,7 +269,7 @@ module.exports = [
   { name: 'Tarde', category: 'Tiempo', url: 'http://localhost:3001/tiempo/tarde2.png' },
 
   // Sensaciones y sentimientos
-  { name: 'Alegre', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/alegre.png' },
+  /* { name: 'Alegre', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/alegre.png' },
   { name: 'Triste', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/triste.png' },
   { name: 'Contento', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/contento.png' },
   { name: 'Sorprendido', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/sorprendido.png' },
@@ -289,8 +287,27 @@ module.exports = [
   { name: 'Miedo', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/miedo.png' },
   { name: 'Paciencia', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/paciencia.png' },
   { name: 'Frío', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/frío.png' },
-  { name: 'Caliente', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/caliente.png' },
+  { name: 'Caliente', category: 'Sensaciones y Sentimientos', url: 'http://localhost:3001/sensaciones-sentimientos/caliente.png' }, */
 
+  { name: 'Alegre', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/alegre.png' },
+  { name: 'Triste', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/triste.png' },
+  { name: 'Contento', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/contento.png' },
+  { name: 'Sorprendido', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/sorprendido.png' },
+  { name: 'Divertido', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/divertido.png' },
+  { name: 'Aburrido', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/aburrido.png' },
+  { name: 'Asustado', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/asustado.png' },
+  { name: 'Cansado', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/cansado.png' },
+  { name: 'Enfermo', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/enfermo.png' },
+  { name: 'Enfadado', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/enfadado.png' },
+  { name: 'Mareado', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/mareado.png' },
+  { name: 'Nervioso', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/nervioso.png' },
+  { name: 'Calor', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/calor.png' },
+  { name: 'Dolor', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/dolor.png' },
+  { name: 'Incómodo', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/incómodo.png' },
+  { name: 'Miedo', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/miedo.png' },
+  { name: 'Paciencia', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/paciencia.png' },
+  { name: 'Frío', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/frío.png' },
+  { name: 'Caliente', category: 'Sensaciones', url: 'http://localhost:3001/sensaciones-sentimientos/caliente.png' },
   // Espacio
   { name: 'Arriba', category: 'Espacio', url: 'http://localhost:3001/espacio/arriba.png' },
   { name: 'Abajo', category: 'Espacio', url: 'http://localhost:3001/espacio/abajo.png' },
